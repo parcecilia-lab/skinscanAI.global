@@ -1,94 +1,72 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
-
-type Language = 'en' | 'es';
-
-interface Translations {
-  [key: string]: {
-    en: string;
-    es: string;
-  };
-}
+type Language = 'en' | 'es' | 'pt' | 'fr' | 'it' | 'de' | 'ru' | 'zh' | 'ja';
 
 const translations: Translations = {
-  appName: { en: 'SkinscanAI', es: 'SkinscanAI' },
-  tagline: { en: 'Professional AI Skin Analysis', es: 'Análisis Profesional de Piel con IA' },
-  getStarted: { en: 'Get Started', es: 'Comenzar' },
-  uploadPhoto: { en: 'Upload Photo', es: 'Subir Foto' },
-  analyzeNow: { en: 'Analyze Now', es: 'Analizar Ahora' },
-  results: { en: 'Results', es: 'Resultados' },
-  pricing: { en: 'Pricing', es: 'Precios' },
-  signIn: { en: 'Sign In', es: 'Iniciar Sesión' },
-  signUp: { en: 'Sign Up', es: 'Registrarse' },
-  signOut: { en: 'Sign Out', es: 'Cerrar Sesión' },
-  email: { en: 'Email', es: 'Correo Electrónico' },
-  password: { en: 'Password', es: 'Contraseña' },
-  fullName: { en: 'Full Name', es: 'Nombre Completo' },
-  skinType: { en: 'Skin Type', es: 'Tipo de Piel' },
-  conditions: { en: 'Conditions', es: 'Condiciones' },
-  hydration: { en: 'Hydration', es: 'Hidratación' },
-  elasticity: { en: 'Elasticity', es: 'Elasticidad' },
-  amRoutine: { en: 'Morning Routine', es: 'Rutina Matutina' },
-  pmRoutine: { en: 'Evening Routine', es: 'Rutina Nocturna' },
-  ingredientsToUse: { en: 'Recommended Ingredients', es: 'Ingredientes Recomendados' },
-  ingredientsToAvoid: { en: 'Ingredients to Avoid', es: 'Ingredientes a Evitar' },
-  progressTimeline: { en: 'Progress Timeline', es: 'Cronograma de Progreso' },
-  free: { en: 'Free', es: 'Gratis' },
-  pro: { en: 'Pro', es: 'Pro' },
-  business: { en: 'Business', es: 'Empresarial' },
-  perMonth: { en: '/month', es: '/mes' },
-  analysesPerMonth: { en: 'analyses per month', es: 'análisis por mes' },
-  unlimitedAnalyses: { en: 'Unlimited analyses', es: 'Análisis ilimitados' },
-  basicSupport: { en: 'Basic support', es: 'Soporte básico' },
-  prioritySupport: { en: 'Priority support', es: 'Soporte prioritario' },
-  advancedReports: { en: 'Advanced reports', es: 'Reportes avanzados' },
-  apiAccess: { en: 'API access', es: 'Acceso API' },
-  choosePlan: { en: 'Choose Plan', es: 'Elegir Plan' },
-  currentPlan: { en: 'Current Plan', es: 'Plan Actual' },
-  medicalDisclaimer: { en: 'Medical Disclaimer', es: 'Aviso Médico' },
-  privacyPolicy: { en: 'Privacy Policy', es: 'Política de Privacidad' },
-  termsOfService: { en: 'Terms of Service', es: 'Términos de Servicio' },
+  appName: { en: 'SkinscanAI', es: 'SkinscanAI', pt: 'SkinscanAI', fr: 'SkinscanAI', it: 'SkinscanAI', de: 'SkinscanAI', ru: 'SkinscanAI', zh: 'SkinscanAI', ja: 'SkinscanAI' },
+  tagline: { 
+    en: 'Professional AI Skin Analysis', 
+    es: 'Análisis profesional de la piel con IA', 
+    pt: 'Análise profissional da pele com IA', 
+    fr: 'Analyse de peau professionnelle par IA',
+    it: 'Analisi professionale della pelle con IA',
+    de: 'Professionelle KI-Hautanalyse',
+    ru: 'Профессиональный анализ кожи с ИИ',
+    zh: '专业 AI 皮肤分析',
+    ja: 'プロフェッショナルAI肌分析'
+  },
+  getStarted: { en: 'Get Started', es: 'Comenzar', pt: 'Começar', fr: 'Commencer', it: 'Inizia', de: 'Loslegen', ru: 'Начать', zh: '开始使用', ja: '始める' },
+  uploadPhoto: { en: 'Upload Photo', es: 'Subir foto', pt: 'Enviar foto', fr: 'Charger une photo', it: 'Carica foto', de: 'Foto hochladen', ru: 'Загрузить фото', zh: '上传照片', ja: '写真をアップロード' },
+  analyzeNow: { en: 'Analyze Now', es: 'Analizar ahora', pt: 'Analisar agora', fr: 'Analyser maintenant', it: 'Analizza ora', de: 'Jetzt analysieren', ru: 'Анализировать сейчас', zh: '立即分析', ja: '今すぐ分析' },
+  results: { en: 'Results', es: 'Resultados', pt: 'Resultados', fr: 'Résultats', it: 'Risultati', de: 'Ergebnisse', ru: 'Результаты', zh: '结果', ja: '結果' },
+  pricing: { en: 'Pricing', es: 'Planes y precios', pt: 'Preços', fr: 'Tarifs', it: 'Prezzi', de: 'Preise', ru: 'Цены', zh: '价格', ja: '料金' },
+  signIn: { en: 'Sign In', es: 'Iniciar sesión', pt: 'Entrar', fr: 'Se connecter', it: 'Accedi', de: 'Anmelden', ru: 'Войти', zh: '登录', ja: 'サインイン' },
+  signUp: { en: 'Sign Up', es: 'Registrarse', pt: 'Cadastrar-se', fr: "S'inscrire", it: 'Registrati', de: 'Registrieren', ru: 'Регистрация', zh: '注册', ja: 'サインアップ' },
+  signOut: { en: 'Sign Out', es: 'Cerrar sesión', pt: 'Sair', fr: 'Déconnexion', it: 'Esci', de: 'Abmelden', ru: 'Выйти', zh: '退出登录', ja: 'サインアウト' },
+  email: { en: 'Email', es: 'Correo electrónico', pt: 'E-mail', fr: 'E-mail', it: 'Email', de: 'E-Mail', ru: 'Email', zh: '电子邮件', ja: 'メールアドレス' },
+  password: { en: 'Password', es: 'Contraseña', pt: 'Senha', fr: 'Mot de passe', it: 'Password', de: 'Passwort', ru: 'Пароль', zh: '密码', ja: 'パスワード' },
+  fullName: { en: 'Full Name', es: 'Nombre completo', pt: 'Nome completo', fr: 'Nom complet', it: 'Nome completo', de: 'Vollständiger Name', ru: 'Полное имя', zh: '全名', ja: '氏名' },
+  skinType: { en: 'Skin Type', es: 'Tipo de piel', pt: 'Tipo de pele', fr: 'Type de peau', it: 'Tipo di pelle', de: 'Hauttyp', ru: 'Тип кожи', zh: '肤质', ja: '肌タイプ' },
+  conditions: { en: 'Conditions', es: 'Afecciones', pt: 'Condições', fr: 'Affections', it: 'Affezioni', de: 'Hautzustand', ru: 'Состояние', zh: '皮肤状况', ja: '肌の状態' },
+  hydration: { en: 'Hydration', es: 'Hidratación', pt: 'Hidratação', fr: 'Hydratation', it: 'Idratazione', de: 'Feuchtigkeit', ru: 'Увлажнение', zh: '含水量', ja: '水分量' },
+  elasticity: { en: 'Elasticity', es: 'Elasticidad', pt: 'Elasticidade', fr: 'Élasticité', it: 'Elasticità', de: 'Elastizität', ru: 'Эластичность', zh: '弹性', ja: '弾力' },
+  amRoutine: { en: 'Morning Routine', es: 'Rutina de mañana', pt: 'Rotina matinal', fr: 'Routine du matin', it: 'Routine mattutina', de: 'Morgenroutine', ru: 'Утренний уход', zh: '早间护肤', ja: '朝のルーティン' },
+  pmRoutine: { en: 'Evening Routine', es: 'Rutina de noche', pt: 'Rotina noturna', fr: 'Routine du soir', it: 'Routine serale', de: 'Abendroutine', ru: 'Вечерний уход', zh: '晚间护肤', ja: '夜のルーティン' },
+  ingredientsToUse: { en: 'Recommended Ingredients', es: 'Ingredientes recomendados', pt: 'Ingredientes recomendados', fr: 'Ingrédients recommandés', it: 'Ingredienti consigliati', de: 'Empfohlene Inhaltsstoffe', ru: 'Рекомендуемые ингредиенты', zh: '推荐成分', ja: 'おすすめの成分' },
+  ingredientsToAvoid: { en: 'Ingredients to Avoid', es: 'Ingredientes a evitar', pt: 'Ingredientes a evitar', fr: 'Ingrédients à éviter', it: 'Ingredienti da evitare', de: 'Zu vermeidende Inhaltsstoffe', ru: 'Ингредиенты, которых следует избегать', zh: '应避开的成分', ja: '避けるべき成分' },
+  progressTimeline: { en: 'Progress Timeline', es: 'Historial de progreso', pt: 'Histórico de progresso', fr: 'Historique de progression', it: 'Cronologia progressi', de: 'Fortschrittsverlauf', ru: 'История прогресса', zh: '进度时间线', ja: '進捗タイムライン' },
+  free: { en: 'Free', es: 'Gratis', pt: 'Grátis', fr: 'Gratuit', it: 'Gratis', de: 'Kostenlos', ru: 'Бесплатно', zh: '免费', ja: '無料' },
+  pro: { en: 'Pro', es: 'Pro', pt: 'Pro', fr: 'Pro', it: 'Pro', de: 'Pro', ru: 'Pro', zh: '专业版', ja: 'プロ' },
+  business: { en: 'Business', es: 'Empresarial', pt: 'Empresarial', fr: 'Entreprise', it: 'Business', de: 'Business', ru: 'Бизнес', zh: '商务版', ja: 'ビジネス' },
+  perMonth: { en: '/month', es: '/mes', pt: '/mês', fr: '/mois', it: '/mese', de: '/Monat', ru: '/мес', zh: '/月', ja: '/月' },
+  analysesPerMonth: { en: 'analyses per month', es: 'análisis por mes', pt: 'análises por mês', fr: 'analyses par mois', it: 'analisi al mese', de: 'Analysen pro Monat', ru: 'анализов в месяц', zh: '每月分析次数', ja: '月間分析回数' },
+  unlimitedAnalyses: { en: 'Unlimited analyses', es: 'Análisis ilimitados', pt: 'Análises ilimitadas', fr: 'Analyses illimitées', it: 'Analisi illimitate', de: 'Unbegrenzte Analysen', ru: 'Безлимитные анализы', zh: '无限次分析', ja: '分析無制限' },
+  basicSupport: { en: 'Basic support', es: 'Soporte básico', pt: 'Suporte básico', fr: 'Support de base', it: 'Supporto base', de: 'Basissupport', ru: 'Базовая поддержка', zh: '基础支持', ja: '基本サポート' },
+  prioritySupport: { en: 'Priority support', es: 'Soporte prioritario', pt: 'Suporte prioritário', fr: 'Support prioritaire', it: 'Supporto prioritario', de: 'Prioritätssupport', ru: 'Приоритетная поддержка', zh: '优先支持', ja: '優先サポート' },
+  advancedReports: { en: 'Advanced reports', es: 'Informes avanzados', pt: 'Relatórios avanzados', fr: 'Rapports avancés', it: 'Report avanzati', de: 'Erweiterte Berichte', ru: 'Расширенные отчеты', zh: '高级报告', ja: '詳細レポート' },
+  apiAccess: { en: 'API access', es: 'Acceso a la API', pt: 'Acesso à API', fr: 'Accès API', it: 'Accesso API', de: 'API-Zugriff', ru: 'Доступ к API', zh: 'API 访问', ja: 'APIアクセス' },
+  choosePlan: { en: 'Choose Plan', es: 'Elegir plan', pt: 'Escolher plano', fr: 'Choisir un plan', it: 'Scegli piano', de: 'Plan wählen', ru: 'Выбрать план', zh: '选择方案', ja: 'プランを選択' },
+  currentPlan: { en: 'Current Plan', es: 'Plan actual', pt: 'Plano atual', fr: 'Plan actuel', it: 'Piano attuale', de: 'Aktueller Plan', ru: 'Текущий план', zh: '当前方案', ja: '現在のプラン' },
+  medicalDisclaimer: { en: 'Medical Disclaimer', es: 'Aviso médico', pt: 'Aviso médico', fr: 'Avis médical', it: 'Avviso medico', de: 'Medizinischer Haftungsausschluss', ru: 'Отказ от ответственности', zh: '医疗免责声明', ja: '免責事項' },
+  privacyPolicy: { en: 'Privacy Policy', es: 'Política de privacidad', pt: 'Política de privacidade', fr: 'Politique de confidentialité', it: 'Informativa sulla privacy', de: 'Datenschutzerklärung', ru: 'Политика конфиденциальности', zh: '隐私政策', ja: 'プライバシーポリシー' },
+  termsOfService: { en: 'Terms of Service', es: 'Términos de servicio', pt: 'Termos de serviço', fr: "Conditions d'utilisation", it: 'Termini di servizio', de: 'Nutzungsbedingungen', ru: 'Условия использования', zh: '服务条款', ja: '利用規約' },
   disclaimer: {
     en: 'This tool provides informational analysis only and is not a substitute for professional medical advice. Always consult with a qualified healthcare provider for skin concerns.',
-    es: 'Esta herramienta proporciona análisis informativo únicamente y no sustituye el consejo médico profesional. Siempre consulte con un proveedor de atención médica calificado para problemas de piel.'
+    es: 'Esta herramienta solo proporciona análisis informativo y no sustituye el asesoramiento médico profesional. Consulte siempre con un profesional de la salud cualificado para cualquier duda sobre su piel.',
+    pt: 'Esta ferramenta fornece apenas análise informativa e não substitui o aconselhamento médico profissional. Consulte sempre um profissional de saúde qualificado para problemas de pele.',
+    fr: 'Cet outil fournit uniquement une analyse informative et ne remplace pas un avis médical professionnel. Consultez toujours un professionnel de santé qualifié pour vos problèmes de peau.',
+    it: 'Questo strumento fornisce solo analisi informative e non sostituisce il parere medico professionale. Consultare sempre un operatore sanitario qualificato per problemi della pelle.',
+    de: 'Dieses Tool dient nur zu Informationszwecken und ersetzt keine professionelle medizinische Beratung. Wenden Sie sich bei Hautproblemen immer an einen qualifizierten Gesundheitsdienstleister.',
+    ru: 'Этот инструмент предназначен только для информационного анализа и не заменяет профессиональную медицинскую консультацию. Всегда консультируйтесь с квалифицированным врачом.',
+    zh: '此工具仅提供信息分析，不能替代专业医疗建议。如有皮肤问题，请务必咨询合格的医疗保健提供者。',
+    ja: 'このツールは情報分析のみを目的としており、専門的な医学的アドバイスに代わるものではありません。肌に関する悩みがある場合は、必ず専門の医療機関にご相談ください。'
   },
-  myAnalyses: { en: 'My Analyses', es: 'Mis Análisis' },
-  dashboard: { en: 'Dashboard', es: 'Panel' },
-  account: { en: 'Account', es: 'Cuenta' },
-  analyzing: { en: 'Analyzing your skin...', es: 'Analizando tu piel...' },
-  uploadInstruction: { en: 'Upload a clear photo of your face', es: 'Sube una foto clara de tu rostro' },
-  dragDrop: { en: 'Drag and drop or click to upload', es: 'Arrastra y suelta o haz clic para subir' },
-  heroTitle: { en: 'Transform Your Skincare Journey', es: 'Transforma tu Rutina de Cuidado de la Piel' },
-  heroSubtitle: { en: 'Get personalized skin analysis powered by AI in seconds', es: 'Obtén análisis de piel personalizado con IA en segundos' },
-  features: { en: 'Features', es: 'Características' },
-  howItWorks: { en: 'How It Works', es: 'Cómo Funciona' },
+  myAnalyses: { en: 'My Analyses', es: 'Mis análisis', pt: 'Minhas análises', fr: 'Mes analyses', it: 'Le mie analisi', de: 'Meine Analysen', ru: 'Мои анализы', zh: '我的分析', ja: 'マイ分析' },
+  dashboard: { en: 'Dashboard', es: 'Panel de control', pt: 'Painel', fr: 'Tableau de bord', it: 'Dashboard', de: 'Dashboard', ru: 'Панель управления', zh: '仪表板', ja: 'ダッシュボード' },
+  account: { en: 'Account', es: 'Cuenta', pt: 'Conta', fr: 'Compte', it: 'Account', de: 'Konto', ru: 'Аккаунт', zh: '账户', ja: 'アカウント' },
+  analyzing: { en: 'Analyzing your skin...', es: 'Analizando tu piel...', pt: 'Analisando sua pele...', fr: 'Analyse de votre peau...', it: 'Analisi della pelle...', de: 'Haut wird analysiert...', ru: 'Анализ кожи...', zh: '正在分析您的皮肤...', ja: '肌を分析中...' },
+  uploadInstruction: { en: 'Upload a clear photo of your face', es: 'Sube una foto clara de tu rostro', pt: 'Envie uma foto clara do seu rosto', fr: 'Chargez une photo claire de votre visage', it: 'Carica una foto chiara del viso', de: 'Laden Sie ein klares Foto Ihres Gesichts hoch', ru: 'Загрузите четкое фото лица', zh: '上传一张清晰的面部照片', ja: '顔のはっきりした写真をアップロードしてください' },
+  dragDrop: { en: 'Drag and drop or click to upload', es: 'Arrastra y suelta o haz clic para subir', pt: 'Arraste e solte ou clique para enviar', fr: 'Glissez-déposez ou cliquez pour charger', it: 'Trascina o clicca per caricare', de: 'Per Drag & Drop oder Klick hochladen', ru: 'Перетащите или нажмите для загрузки', zh: '拖放或点击上传', ja: 'ドラッグ＆ドロップまたはクリックでアップロード' },
+  heroTitle: { en: 'Transform Your Skincare Journey', es: 'Transforma tu rutina de cuidado de la piel', pt: 'Transforme sua jornada de cuidados com a pele', fr: 'Transformez votre routine de soins', it: 'Trasforma la tua cura della pelle', de: 'Verändern Sie Ihre Hautpflege', ru: 'Преобразите свой уход за кожей', zh: '开启您的护肤之旅', ja: 'スキンケアの旅を変える' },
+  heroSubtitle: { en: 'Get personalized skin analysis powered by AI in seconds', es: 'Obtén un análisis personalizado con IA en cuestión de segundos', pt: 'Obtenha uma análise de pele personalizada com IA em segundos', fr: 'Obtenez une analyse de peau personnalisée par IA en quelques secondes', it: 'Ottieni un\'analisi della pelle personalizzata con IA in pochi segundos', de: 'Personalisierte Hautanalyse mit KI in Sekunden', ru: 'Персональный анализ кожи с ИИ за секунды', zh: '几秒钟内获得 AI 驱动的个性化皮肤分析', ja: 'AIによるパーソナライズされた肌分析を数秒で' },
+  features: { en: 'Features', es: 'Funciones', pt: 'Recursos', fr: 'Fonctionnalités', it: 'Funzioni', de: 'Funktionen', ru: 'Функции', zh: '功能', ja: '特徴' },
+  howItWorks: { en: 'How It Works', es: 'Cómo funciona', pt: 'Como funciona', fr: 'Comment ça marche', it: 'Come funziona', de: 'So funktioniert es', ru: 'Как это работает', zh: '工作原理', ja: '仕組み' },
 };
-
-interface LanguageContextType {
-  language: Language;
-  setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
-}
-
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
-
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>('en');
-
-  const t = (key: string): string => {
-    return translations[key]?.[language] || key;
-  };
-
-  return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
-      {children}
-    </LanguageContext.Provider>
-  );
-}
-
-export function useLanguage() {
-  const context = useContext(LanguageContext);
-  if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
-  return context;
-}
